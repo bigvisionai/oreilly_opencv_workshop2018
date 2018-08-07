@@ -57,8 +57,11 @@ Click `OK` to save. **Do NOT close the Environment Variables window.**
 12) To test your installation, press `Start`, enter `Command Line`, and type:
 
 `activate OpenCV-<version you selected (3.4.1 or master)>-py2`
+
 `ipython`
+
 `import cv2`
+
 `cv2.__version__`
 
 This should output the version you selected (`3.4.1` or `4.0.0-pre` for master).

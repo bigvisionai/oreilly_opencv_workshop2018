@@ -35,7 +35,7 @@ cd opencv_contrib
 git checkout %cvVersion%
 cd ..
 ::============================================::
-CALL conda activate OpenCV-%cvVersion%-py2
+CALL activate OpenCV-%cvVersion%-py2
 ::////////////////////////////////////////////::
 FOR /F "tokens=* USEBACKQ" %%a IN (`where python`) DO (
 	set var!count!=%%a

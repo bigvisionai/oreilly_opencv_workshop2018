@@ -17,19 +17,19 @@ tracker_types = ['BOOSTING', 'MIL','KCF', 'TLD', 'MEDIANFLOW', 'GOTURN','MOSSE']
 tracker_type = tracker_types[6]
 
 if tracker_type == 'BOOSTING':
-    tracker = cv2.TrackerBoosting_create()
+    tracker = cv2.legacy_TrackerBoosting.create()
 elif tracker_type == 'MIL':
     tracker = cv2.TrackerMIL_create()
 elif tracker_type == 'KCF':
     tracker = cv2.TrackerKCF_create()
 elif tracker_type == 'TLD':
-    tracker = cv2.TrackerTLD_create()
+    tracker = cv2.legacy_TrackerTLD.create()
 elif tracker_type == 'MEDIANFLOW':
-    tracker = cv2.TrackerMedianFlow_create()
+    tracker = cv2.legacy_TrackerMedianFlow.create()
 elif tracker_type == 'GOTURN':
     tracker = cv2.TrackerGOTURN_create()   
 else:
-    tracker = cv2.TrackerMOSSE_create()
+    tracker = cv2.legacy_TrackerMOSSE.create()
 
 # Read video
 video = cv2.VideoCapture("chaplin.mp4")

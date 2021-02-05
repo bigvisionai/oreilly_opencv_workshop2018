@@ -28,10 +28,28 @@ node {
   }
 }
 node {
+  name: "Preprocessor/mul"
+  op: "Mul"
+  input: "image_tensor"
+  input: "Preprocessor/mul/x"
+}
+node {
+  name: "Preprocessor/sub"
+  op: "Sub"
+  input: "Preprocessor/mul"
+  input: "Preprocessor/sub/y"
+}
+node {
   name: "FeatureExtractor/MobilenetV2/Conv/Conv2D"
   op: "Conv2D"
-  input: "image_tensor"
+  input: "Preprocessor/sub"
   input: "FeatureExtractor/MobilenetV2/Conv/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -72,7 +90,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -86,6 +104,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/Conv/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -126,7 +150,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -140,6 +164,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -180,7 +210,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -194,6 +224,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv/output"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -234,7 +270,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -248,6 +284,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -288,7 +330,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -302,6 +344,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_1/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -342,7 +390,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -356,6 +404,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_1/output"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -396,7 +450,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -410,6 +464,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -450,7 +510,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -464,6 +524,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_2/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -504,7 +570,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -524,6 +590,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_3/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -564,7 +636,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -578,6 +650,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -618,7 +696,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -632,6 +710,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_3/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -672,7 +756,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -686,6 +770,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_3/output"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -726,7 +816,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -740,6 +830,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -780,7 +876,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -794,6 +890,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_4/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -834,7 +936,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -854,6 +956,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_5/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -894,7 +1002,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -908,6 +1016,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -948,7 +1062,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -962,6 +1076,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_5/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1002,7 +1122,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1022,6 +1142,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_6/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1062,7 +1188,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1076,6 +1202,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1116,7 +1248,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1130,6 +1262,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_6/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1170,7 +1308,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1184,6 +1322,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_6/output"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1224,7 +1368,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1238,6 +1382,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1278,7 +1428,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1292,6 +1442,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_7/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1332,7 +1488,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1352,6 +1508,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_8/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1392,7 +1554,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1406,6 +1568,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1446,7 +1614,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1460,6 +1628,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_8/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1500,7 +1674,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1520,6 +1694,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_9/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1560,7 +1740,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1574,6 +1754,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1614,7 +1800,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1628,6 +1814,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_9/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1668,7 +1860,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1688,6 +1880,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_10/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1728,7 +1926,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1742,6 +1940,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1782,7 +1986,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1796,6 +2000,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_10/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1836,7 +2046,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1850,6 +2060,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_10/output"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1890,7 +2106,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1904,6 +2120,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1944,7 +2166,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -1958,6 +2180,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_11/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -1998,7 +2226,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2018,6 +2246,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_12/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2058,7 +2292,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2072,6 +2306,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2112,7 +2352,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2126,6 +2366,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_12/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2166,7 +2412,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2186,6 +2432,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2226,7 +2478,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2240,6 +2492,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2280,7 +2538,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2294,6 +2552,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2334,7 +2598,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2348,6 +2612,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/output"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2388,7 +2658,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2402,6 +2672,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2442,7 +2718,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2456,6 +2732,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_14/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2496,7 +2778,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2516,6 +2798,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_15/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2556,7 +2844,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2570,6 +2858,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2610,7 +2904,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2624,6 +2918,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_15/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2664,7 +2964,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2684,6 +2984,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_16/input"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2724,7 +3030,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2738,6 +3044,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2778,7 +3090,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2792,6 +3104,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_16/project/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2832,7 +3150,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2846,6 +3164,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_16/output"
   input: "FeatureExtractor/MobilenetV2/Conv_1/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2886,7 +3210,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2900,6 +3224,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2940,7 +3270,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -2954,6 +3284,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -2994,7 +3330,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3008,6 +3344,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3048,7 +3390,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3062,6 +3404,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3102,7 +3450,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3116,6 +3464,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3156,7 +3510,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3170,6 +3524,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3210,7 +3570,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3224,6 +3584,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3264,7 +3630,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3278,6 +3644,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3318,7 +3690,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3332,6 +3704,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3372,7 +3750,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3386,6 +3764,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3426,7 +3810,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3440,6 +3824,12 @@ node {
   op: "DepthwiseConv2dNative"
   input: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/depthwise_weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3480,7 +3870,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3494,6 +3884,12 @@ node {
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/Relu6"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3534,7 +3930,7 @@ node {
   attr {
     key: "epsilon"
     value {
-      f: 0.0010000000475
+      f: 0.001
     }
   }
 }
@@ -3549,6 +3945,12 @@ node {
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
   input: "BoxPredictor_0/BoxEncodingPredictor/weights"
   attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+  attr {
     key: "dilations"
     value {
       list {
@@ -3557,6 +3959,12 @@ node {
         i: 1
         i: 1
       }
+    }
+  }
+  attr {
+    key: "loc_pred_transposed"
+    value {
+      b: true
     }
   }
   attr {
@@ -3582,12 +3990,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_0/BoxEncodingPredictor/Conv2D"
   input: "BoxPredictor_0/BoxEncodingPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_0/ClassPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
   input: "BoxPredictor_0/ClassPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3622,12 +4042,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_0/ClassPredictor/Conv2D"
   input: "BoxPredictor_0/ClassPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_1/BoxEncodingPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
   input: "BoxPredictor_1/BoxEncodingPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3637,6 +4069,12 @@ node {
         i: 1
         i: 1
       }
+    }
+  }
+  attr {
+    key: "loc_pred_transposed"
+    value {
+      b: true
     }
   }
   attr {
@@ -3662,12 +4100,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_1/BoxEncodingPredictor/Conv2D"
   input: "BoxPredictor_1/BoxEncodingPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_1/ClassPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
   input: "BoxPredictor_1/ClassPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3702,12 +4152,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_1/ClassPredictor/Conv2D"
   input: "BoxPredictor_1/ClassPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_2/BoxEncodingPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
   input: "BoxPredictor_2/BoxEncodingPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3717,6 +4179,12 @@ node {
         i: 1
         i: 1
       }
+    }
+  }
+  attr {
+    key: "loc_pred_transposed"
+    value {
+      b: true
     }
   }
   attr {
@@ -3742,12 +4210,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_2/BoxEncodingPredictor/Conv2D"
   input: "BoxPredictor_2/BoxEncodingPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_2/ClassPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
   input: "BoxPredictor_2/ClassPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3782,12 +4262,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_2/ClassPredictor/Conv2D"
   input: "BoxPredictor_2/ClassPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_3/BoxEncodingPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
   input: "BoxPredictor_3/BoxEncodingPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3797,6 +4289,12 @@ node {
         i: 1
         i: 1
       }
+    }
+  }
+  attr {
+    key: "loc_pred_transposed"
+    value {
+      b: true
     }
   }
   attr {
@@ -3822,12 +4320,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_3/BoxEncodingPredictor/Conv2D"
   input: "BoxPredictor_3/BoxEncodingPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_3/ClassPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
   input: "BoxPredictor_3/ClassPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3862,12 +4372,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_3/ClassPredictor/Conv2D"
   input: "BoxPredictor_3/ClassPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_4/BoxEncodingPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
   input: "BoxPredictor_4/BoxEncodingPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3877,6 +4399,12 @@ node {
         i: 1
         i: 1
       }
+    }
+  }
+  attr {
+    key: "loc_pred_transposed"
+    value {
+      b: true
     }
   }
   attr {
@@ -3902,12 +4430,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_4/BoxEncodingPredictor/Conv2D"
   input: "BoxPredictor_4/BoxEncodingPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_4/ClassPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
   input: "BoxPredictor_4/ClassPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3942,12 +4482,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_4/ClassPredictor/Conv2D"
   input: "BoxPredictor_4/ClassPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_5/BoxEncodingPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/Relu6"
   input: "BoxPredictor_5/BoxEncodingPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -3957,6 +4509,12 @@ node {
         i: 1
         i: 1
       }
+    }
+  }
+  attr {
+    key: "loc_pred_transposed"
+    value {
+      b: true
     }
   }
   attr {
@@ -3982,12 +4540,24 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_5/BoxEncodingPredictor/Conv2D"
   input: "BoxPredictor_5/BoxEncodingPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "BoxPredictor_5/ClassPredictor/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/Relu6"
   input: "BoxPredictor_5/ClassPredictor/weights"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
   attr {
     key: "dilations"
     value {
@@ -4022,6 +4592,12 @@ node {
   op: "BiasAdd"
   input: "BoxPredictor_5/ClassPredictor/Conv2D"
   input: "BoxPredictor_5/ClassPredictor/biases"
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
 }
 node {
   name: "concat/axis_flatten"
@@ -4031,30 +4607,12 @@ node {
     value {
       tensor {
         dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
         int_val: -1
-      }
-    }
-  }
-}
-node {
-  name: "PriorBox/concat/axis"
-  op: "Const"
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
         tensor_shape {
           dim {
             size: 1
           }
         }
-        int_val: -2
       }
     }
   }
@@ -4142,27 +4700,6 @@ node {
   input: "concat/axis_flatten"
 }
 node {
-  name: "reshape_prior_boxes_to_4d"
-  op: "Const"
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 4
-          }
-        }
-        int_val: 1
-        int_val: 2
-        int_val: -1
-        int_val: 1
-      }
-    }
-  }
-}
-node {
   name: "PriorBox_0"
   op: "PriorBox"
   input: "BoxPredictor_0/BoxEncodingPredictor/BiasAdd"
@@ -4184,14 +4721,14 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 30.0
+        float_val: 42.4264075033
+        float_val: 84.8528150067
         tensor_shape {
           dim {
             size: 3
           }
         }
-        float_val: 30.0
-        float_val: 42.4264068604
-        float_val: 84.8528137207
       }
     }
   }
@@ -4200,15 +4737,15 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 0.1
+        float_val: 0.1
+        float_val: 0.2
+        float_val: 0.2
         tensor_shape {
           dim {
             size: 4
           }
         }
-        float_val: 0.10000000149
-        float_val: 0.10000000149
-        float_val: 0.20000000298
-        float_val: 0.20000000298
       }
     }
   }
@@ -4217,23 +4754,17 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 30.0
+        float_val: 84.8528150067
+        float_val: 42.4264075033
         tensor_shape {
           dim {
             size: 3
           }
         }
-        float_val: 30.0
-        float_val: 84.8528137207
-        float_val: 42.4264068604
       }
     }
   }
-}
-node {
-  name: "PriorBox_0/4d"
-  op: "Reshape"
-  input: "PriorBox_0"
-  input: "reshape_prior_boxes_to_4d"
 }
 node {
   name: "PriorBox_1"
@@ -4257,17 +4788,17 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 105.0
+        float_val: 74.2462120245
+        float_val: 148.492424049
+        float_val: 60.6217782649
+        float_val: 181.874430252
+        float_val: 125.499003606
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 105.0
-        float_val: 74.2462158203
-        float_val: 148.492431641
-        float_val: 60.6217765808
-        float_val: 181.956329346
-        float_val: 125.499000549
       }
     }
   }
@@ -4276,15 +4807,15 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 0.1
+        float_val: 0.1
+        float_val: 0.2
+        float_val: 0.2
         tensor_shape {
           dim {
             size: 4
           }
         }
-        float_val: 0.10000000149
-        float_val: 0.10000000149
-        float_val: 0.20000000298
-        float_val: 0.20000000298
       }
     }
   }
@@ -4293,26 +4824,20 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 105.0
+        float_val: 148.492424049
+        float_val: 74.2462120245
+        float_val: 181.865334795
+        float_val: 60.6187465972
+        float_val: 125.499003606
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 105.0
-        float_val: 148.492431641
-        float_val: 74.2462158203
-        float_val: 181.865341187
-        float_val: 60.5914611816
-        float_val: 125.499000549
       }
     }
   }
-}
-node {
-  name: "PriorBox_1/4d"
-  op: "Reshape"
-  input: "PriorBox_1"
-  input: "reshape_prior_boxes_to_4d"
 }
 node {
   name: "PriorBox_2"
@@ -4336,17 +4861,17 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 149.999999106
+        float_val: 106.066016546
+        float_val: 212.132033091
+        float_val: 86.6025398622
+        float_val: 259.820613098
+        float_val: 171.026312471
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 150.0
-        float_val: 106.066017151
-        float_val: 212.132034302
-        float_val: 86.6025390625
-        float_val: 259.93762207
-        float_val: 171.026306152
       }
     }
   }
@@ -4355,15 +4880,15 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 0.1
+        float_val: 0.1
+        float_val: 0.2
+        float_val: 0.2
         tensor_shape {
           dim {
             size: 4
           }
         }
-        float_val: 0.10000000149
-        float_val: 0.10000000149
-        float_val: 0.20000000298
-        float_val: 0.20000000298
       }
     }
   }
@@ -4372,26 +4897,20 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 149.999999106
+        float_val: 212.132033091
+        float_val: 106.066016546
+        float_val: 259.807619587
+        float_val: 86.5982089084
+        float_val: 171.026312471
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 150.0
-        float_val: 212.132034302
-        float_val: 106.066017151
-        float_val: 259.807617188
-        float_val: 86.5592269897
-        float_val: 171.026306152
       }
     }
   }
-}
-node {
-  name: "PriorBox_2/4d"
-  op: "Reshape"
-  input: "PriorBox_2"
-  input: "reshape_prior_boxes_to_4d"
 }
 node {
   name: "PriorBox_3"
@@ -4415,17 +4934,17 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 194.999998212
+        float_val: 137.885821067
+        float_val: 275.771642134
+        float_val: 112.58330146
+        float_val: 337.766795943
+        float_val: 216.333074327
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 195.0
-        float_val: 137.885818481
-        float_val: 275.771636963
-        float_val: 112.583305359
-        float_val: 337.918914795
-        float_val: 216.333084106
       }
     }
   }
@@ -4434,15 +4953,15 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 0.1
+        float_val: 0.1
+        float_val: 0.2
+        float_val: 0.2
         tensor_shape {
           dim {
             size: 4
           }
         }
-        float_val: 0.10000000149
-        float_val: 0.10000000149
-        float_val: 0.20000000298
-        float_val: 0.20000000298
       }
     }
   }
@@ -4451,26 +4970,20 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 194.999998212
+        float_val: 275.771642134
+        float_val: 137.885821067
+        float_val: 337.749904379
+        float_val: 112.57767122
+        float_val: 216.333074327
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 195.0
-        float_val: 275.771636963
-        float_val: 137.885818481
-        float_val: 337.749908447
-        float_val: 112.527000427
-        float_val: 216.333084106
       }
     }
   }
-}
-node {
-  name: "PriorBox_3/4d"
-  op: "Reshape"
-  input: "PriorBox_3"
-  input: "reshape_prior_boxes_to_4d"
 }
 node {
   name: "PriorBox_4"
@@ -4494,17 +5007,17 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 239.999997318
+        float_val: 169.705625588
+        float_val: 339.411251176
+        float_val: 138.564063057
+        float_val: 415.712978788
+        float_val: 261.53393351
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 240.0
-        float_val: 169.705627441
-        float_val: 339.411254883
-        float_val: 138.564071655
-        float_val: 415.90020752
-        float_val: 261.533935547
       }
     }
   }
@@ -4513,15 +5026,15 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 0.1
+        float_val: 0.1
+        float_val: 0.2
+        float_val: 0.2
         tensor_shape {
           dim {
             size: 4
           }
         }
-        float_val: 0.10000000149
-        float_val: 0.10000000149
-        float_val: 0.20000000298
-        float_val: 0.20000000298
       }
     }
   }
@@ -4530,26 +5043,20 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 239.999997318
+        float_val: 339.411251176
+        float_val: 169.705625588
+        float_val: 415.692189171
+        float_val: 138.557133531
+        float_val: 261.53393351
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 240.0
-        float_val: 339.411254883
-        float_val: 169.705627441
-        float_val: 415.692199707
-        float_val: 138.494766235
-        float_val: 261.533935547
       }
     }
   }
-}
-node {
-  name: "PriorBox_4/4d"
-  op: "Reshape"
-  input: "PriorBox_4"
-  input: "reshape_prior_boxes_to_4d"
 }
 node {
   name: "PriorBox_5"
@@ -4573,17 +5080,17 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 284.999996424
+        float_val: 201.525430109
+        float_val: 403.050860219
+        float_val: 164.544824654
+        float_val: 493.659161634
+        float_val: 292.40382851
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 285.0
-        float_val: 201.525436401
-        float_val: 403.050872803
-        float_val: 164.544830322
-        float_val: 493.881469727
-        float_val: 292.403839111
       }
     }
   }
@@ -4592,15 +5099,15 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 0.1
+        float_val: 0.1
+        float_val: 0.2
+        float_val: 0.2
         tensor_shape {
           dim {
             size: 4
           }
         }
-        float_val: 0.10000000149
-        float_val: 0.10000000149
-        float_val: 0.20000000298
-        float_val: 0.20000000298
       }
     }
   }
@@ -4609,48 +5116,73 @@ node {
     value {
       tensor {
         dtype: DT_FLOAT
+        float_val: 284.999996424
+        float_val: 403.050860219
+        float_val: 201.525430109
+        float_val: 493.634473963
+        float_val: 164.536595842
+        float_val: 292.40382851
         tensor_shape {
           dim {
             size: 6
           }
         }
-        float_val: 285.0
-        float_val: 403.050872803
-        float_val: 201.525436401
-        float_val: 493.634490967
-        float_val: 164.462539673
-        float_val: 292.403839111
       }
     }
   }
 }
 node {
-  name: "PriorBox_5/4d"
-  op: "Reshape"
-  input: "PriorBox_5"
-  input: "reshape_prior_boxes_to_4d"
-}
-node {
   name: "PriorBox/concat"
   op: "ConcatV2"
-  input: "PriorBox_0/4d"
-  input: "PriorBox_1/4d"
-  input: "PriorBox_2/4d"
-  input: "PriorBox_3/4d"
-  input: "PriorBox_4/4d"
-  input: "PriorBox_5/4d"
-  input: "PriorBox/concat/axis"
+  input: "PriorBox_0"
+  input: "PriorBox_1"
+  input: "PriorBox_2"
+  input: "PriorBox_3"
+  input: "PriorBox_4"
+  input: "PriorBox_5"
+  input: "concat/axis_flatten"
+}
+node {
+  name: "ClassPredictor/concat3d/shape"
+  op: "Const"
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        int_val: 0
+        int_val: -1
+        int_val: 91
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "ClassPredictor/concat3d"
+  op: "Reshape"
+  input: "ClassPredictor/concat"
+  input: "ClassPredictor/concat3d/shape"
 }
 node {
   name: "ClassPredictor/concat/sigmoid"
   op: "Sigmoid"
-  input: "ClassPredictor/concat"
+  input: "ClassPredictor/concat3d"
+}
+node {
+  name: "ClassPredictor/concat/sigmoid/Flatten"
+  op: "Flatten"
+  input: "ClassPredictor/concat/sigmoid"
 }
 node {
   name: "detection_out"
   op: "DetectionOutput"
   input: "BoxEncodingPredictor/concat"
-  input: "ClassPredictor/concat/sigmoid"
+  input: "ClassPredictor/concat/sigmoid/Flatten"
   input: "PriorBox/concat"
   attr {
     key: "background_label_id"
@@ -4667,7 +5199,7 @@ node {
   attr {
     key: "confidence_threshold"
     value {
-      f: 0.00999999977648
+      f: 0.01
     }
   }
   attr {
@@ -4677,15 +5209,9 @@ node {
     }
   }
   attr {
-    key: "loc_pred_transposed"
-    value {
-      b: true
-    }
-  }
-  attr {
     key: "nms_threshold"
     value {
-      f: 0.600000023842
+      f: 0.6
     }
   }
   attr {
@@ -4706,6 +5232,4 @@ node {
       i: 100
     }
   }
-}
-library {
 }

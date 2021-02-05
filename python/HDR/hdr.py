@@ -56,7 +56,7 @@ if __name__ == '__main__':
   
   # Tonemap using Durand's method obtain 24-bit color image
   print("Tonemaping using Durand's method ... ")
-  tonemapDurand = cv2.createTonemapDurand(1.5,4,1.0,1,1)
+  tonemapDurand = cv2.xphoto.createTonemapDurand(1.5,4,1.0,1,1)
   ldrDurand = tonemapDurand.process(hdrDebevec)
   ldrDurand = 3 * ldrDurand
   cv2.imwrite("ldr-Durand.jpg", ldrDurand * 255)

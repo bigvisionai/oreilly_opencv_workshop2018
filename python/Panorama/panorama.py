@@ -29,7 +29,7 @@ if __name__ == "__main__":
 	output_file = "{}_result.png".format(dir_name) 
 	
 	# create stitcher object using stitcher class
-	stitcher = cv2.createStitcher()
+	stitcher = cv2.Stitcher_create()
 
 	status, result = stitcher.stitch(images)
 

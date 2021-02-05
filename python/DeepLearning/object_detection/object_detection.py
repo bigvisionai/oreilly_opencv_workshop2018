@@ -45,8 +45,8 @@ for filename in os.listdir(image_dir):
 
 
     # Create a blob from the image and pass it to the network
-    net.setInput(cv2.dnn.blobFromImage(frameResized, 1.0/127.5, (300, 300), (127.5, 127.5, 127.5), True))
-    
+    net.setInput(cv2.dnn.blobFromImage(frameResized, size=(300, 300), swapRB=True, crop=False))
+
     # Peform Prediction
     out = net.forward()
     

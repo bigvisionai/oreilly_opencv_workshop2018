@@ -28,7 +28,7 @@ threshold = args.threshold
 classFile = args.classes
 
 with open(classFile) as fi:
-    labels = fi.readline().strip().split()
+    labels = fi.read().split("\n")
 
 net = cv2.dnn.readNetFromTensorflow(modelFile, configFile)
 
@@ -43,7 +43,7 @@ while(1):
     rows = frame.shape[0]
     cols = frame.shape[1]
 
-    net.setInput(cv2.dnn.blobFromImage(frame, 1.0/127.5, (300, 300), (127.5, 127.5, 127.5), True))
+    net.setInput(cv2.dnn.blobFromImage(frame, size=(300, 300), swapRB=True, crop=False))
     out = net.forward()
 
     for i in range(out.shape[2]):
